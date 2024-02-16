@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity() {
         contactData?.let {uri->
 
             val queryFields = arrayOf(ContactsContract.Data.CONTACT_ID, ContactsContract.Contacts.DISPLAY_NAME)
-            val cr = this.contentResolver
+            val cr = contentResolver
 
-            val c = cr?.query(
+            val cursor = cr.query(
                 uri,
                 queryFields,
                 null,
@@ -80,22 +80,25 @@ class MainActivity : AppCompatActivity() {
                 null
             )
 
-            c?.let { cursor ->
-                if (cursor.moveToFirst()) {
+            cursor?.use {
+                if (it.moveToFirst()) {
 
-                    val contactId       = cursor.getString(0)
-                    val contactName     = cursor.getString(1)
+                    val contactIdColumnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)
+                    val contactId = if (contactIdColumnIndex != -1) cursor.getString(contactIdColumnIndex) else null
+
+                    val contactNameColumnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                    val contactName = if (contactNameColumnIndex != -1) cursor.getString(contactNameColumnIndex) else null
+
                     val contactNumber   = getNumberFromId(contactId, cr)
 
-                    binding.tvNameValue.setText(contactName)
-                    binding.tvPhoneValue.setText(contactNumber)
+                    binding.tvNameValue.text = contactName
+                    binding.tvPhoneValue.text = contactNumber
                 }
-                c.close()
             }
         }
     }
 
-    private fun getNumberFromId(id: String, cr: ContentResolver): String? {
+    private fun getNumberFromId(id: String?, cr: ContentResolver): String? {
 
         val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER)
         val cursor = cr.query(
