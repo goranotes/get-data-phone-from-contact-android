@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getDataContactPhone(data: Intent?){
+    private fun getDataContactPhone(data: Intent?){
 
         val contactData = data?.data
         contactData?.let {uri->
