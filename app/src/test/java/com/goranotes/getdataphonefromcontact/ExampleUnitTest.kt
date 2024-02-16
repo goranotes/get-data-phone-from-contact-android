@@ -1,4 +1,4 @@
-package com.example.getdataphonefromcontact
+package com.goranotes.getdataphonefromcontact
 
 import org.junit.Test
 

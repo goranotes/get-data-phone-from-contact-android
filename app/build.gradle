@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.getdataphonefromcontact'
+    namespace 'com.goranotes.getdataphonefromcontact'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.getdataphonefromcontact"
+        applicationId "com.goranotes.getdataphonefromcontact"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -44,4 +44,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.github.goranotes:gora-permission:0.0.2'
 }

@@ -1,4 +1,4 @@
-package com.example.getdataphonefromcontact
+package com.goranotes.getdataphonefromcontact
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
